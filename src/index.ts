@@ -12,9 +12,11 @@ const extractPngSig = (path: string) => {
  * @returns
  */
 const bytesToSpacedHexString = (buffer: Buffer<ArrayBuffer>): string => {
-  const arr = Array.from(buffer); // Buffer<ArrayBuffer>のままだと.mapで文字列の配列を作れないのでArrayに変換する。
-
-  return arr.map((e) => e.toString(16).padStart(2, '0').toUpperCase()).join(' ');
+  return buffer
+    .values()
+    .map((e) => e.toString(16).padStart(2, '0').toUpperCase())
+    .toArray()
+    .join(' ');
 };
 
 const arg = process.argv[2];
